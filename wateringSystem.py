@@ -3,8 +3,8 @@ import RPi.GPIO as GPIO
 import time
  
 #GPIO SETUP
-channel = 21
-GPIO.setmode(GPIO.BCM)
+channel = 40
+GPIO.setmode(GPIO.BOARD)
 GPIO.setup(channel, GPIO.IN)
  
 def callback(channel):
