@@ -28,7 +28,7 @@ headers = ['time', 'adc', 'voltage']
  
 while True:
     # open the file in the write mode
-    with open('./raw_moisture.csv', 'w', newline='') as file:
+    with open('./raw_moisture.csv', 'a', newline='') as file:
         now = datetime.now()
         current_time = now.strftime("%H:%M:%S")
         data = [current_time, chan.value, chan.voltage]
