@@ -35,6 +35,7 @@ while True:
         
         # create the csv writer
         writer = csv.writer(file)
+        writer.writerow(headers)
         writer.writerow(data)
 
     print('Raw ADC Value: ', chan.value)
