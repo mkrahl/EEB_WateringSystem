@@ -21,10 +21,10 @@ chan = AnalogIn(mcp, MCP.P0)
 
 headers = ['time', 'adc', 'voltage']
 
-with open('./raw_moisture.csv', 'w', newline='') as file:
-     # create the csv writer
-    writer = csv.writer(file)
-    writer.writerow(headers)
+# with open('./raw_moisture.csv', 'w', newline='') as file:
+#      # create the csv writer
+#     writer = csv.writer(file)
+#     writer.writerow(headers)
  
 while True:
     # open the file in the write mode
@@ -37,6 +37,7 @@ while True:
         writer = csv.writer(file)
         writer.writerow(headers)
         writer.writerow(data)
+        file.close()
 
     print('Raw ADC Value: ', chan.value)
     print('ADC Voltage: ' + str(chan.voltage) + 'V')
