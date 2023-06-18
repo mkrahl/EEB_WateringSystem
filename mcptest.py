@@ -21,10 +21,10 @@ chan = AnalogIn(mcp, MCP.P0)
 
 headers = ['time', 'adc', 'voltage']
 
-# with open('./raw_moisture.csv', 'w', newline='') as file:
-#      # create the csv writer
-#     writer = csv.writer(file)
-#     writer.writerow(headers)
+with open('./raw_moisture.csv', 'a', newline='') as file:
+    # create the csv writer
+    writer = csv.writer(file)
+    writer.writerow(headers)
  
 while True:
     # open the file in the write mode
@@ -35,7 +35,6 @@ while True:
         
         # create the csv writer
         writer = csv.writer(file)
-        writer.writerow(headers)
         writer.writerow(data)
         file.close()
 
