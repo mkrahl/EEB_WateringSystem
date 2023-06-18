@@ -21,14 +21,14 @@ chan = AnalogIn(mcp, MCP.P0)
 
 headers = ['time', 'adc', 'voltage']
 
-with open('./raw_moisture.csv', 'w') as file:
+with open('./raw_moisture.csv', 'w', newline='') as file:
      # create the csv writer
     writer = csv.writer(file)
     writer.writerow(headers)
  
 while True:
     # open the file in the write mode
-    with open('./raw_moisture.csv', 'w') as file:
+    with open('./raw_moisture.csv', 'w', newline='') as file:
         now = datetime.now()
         current_time = now.strftime("%H:%M:%S")
         data = [current_time, chan.value, chan.voltage]
