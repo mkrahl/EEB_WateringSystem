@@ -5,7 +5,7 @@ import time
 import adafruit_mcp3xxx.mcp3008 as MCP
 from adafruit_mcp3xxx.analog_in import AnalogIn
 import csv
-from datetime import datetime
+from datetime import datetime, timedelta
  
 # create the spi bus
 spi = busio.SPI(clock=board.SCK, MISO=board.MISO, MOSI=board.MOSI)
@@ -29,7 +29,7 @@ with open('./raw_moisture.csv', 'a', newline='') as file:
 while True:
     # open the file in the write mode
     with open('./raw_moisture.csv', 'a', newline='') as file:
-        now = datetime.now() + datetime.timedelta(hours=1)
+        now = datetime.now() + timedelta(hours=1)
         current_time = now.strftime("%m/%d/%Y%H:%M:%S")
         data = [current_time, chan.value, chan.voltage]
         
