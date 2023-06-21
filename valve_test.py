@@ -12,3 +12,4 @@ while True:
     time.sleep(10)
     print("on")
     GPIO.output(channel , 0)
+    time.sleep(10)
