@@ -29,8 +29,8 @@ with open('./raw_moisture.csv', 'a', newline='') as file:
 while True:
     # open the file in the write mode
     with open('./raw_moisture.csv', 'a', newline='') as file:
-        now = datetime.now()
-        current_time = now.strftime("%m/%d/%Y, %H:%M:%S")
+        now = datetime.now() + datetime.timedelta(hours=1)
+        current_time = now.strftime("%m/%d/%Y%H:%M:%S")
         data = [current_time, chan.value, chan.voltage]
         
         # create the csv writer
