@@ -9,6 +9,6 @@ GPIO.setwarnings(False)
 while True:
     print("off")
     GPIO.output(channel , 1)
-    time.sleep(2)
+    time.sleep(10)
     print("on")
     GPIO.output(channel , 0)
