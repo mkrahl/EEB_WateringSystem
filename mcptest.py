@@ -40,4 +40,4 @@ while True:
 
     print('Raw ADC Value: ', chan.value)
     print('ADC Voltage: ' + str(chan.voltage) + 'V')
-    time.sleep(3)#180)
+    time.sleep(180)
