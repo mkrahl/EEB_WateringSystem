@@ -20,4 +20,4 @@ chan = AnalogIn(mcp, MCP.P1)
 while True:
     print('Raw ADC Value: ', chan.value)
     print('ADC Voltage: ' + str(chan.voltage) + 'V')
-    time.sleep(10)
+    time.sleep(5)
