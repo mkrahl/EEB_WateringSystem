@@ -4,6 +4,7 @@ import board
 import RPi.GPIO as GPIO
 import adafruit_mcp3xxx.mcp3008 as MCP
 from adafruit_mcp3xxx.analog_in import AnalogIn
+import time
 import valve_controller
 import logger
 

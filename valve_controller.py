@@ -11,7 +11,9 @@ def setup():
 
 def open(seconds):
     GPIO.output(valve_channel , 0)
+    print('Opened valve')
     time.sleep(seconds)
 
 def close():
     GPIO.output(valve_channel , 1)
+    print('Closed valve')
