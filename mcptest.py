@@ -14,7 +14,7 @@ def get_moisture_theshold():
     with open('./conf.json', 'r') as f:
         conf = json.load(f)
         print(conf)
-        return conf.moisture_threshold
+        return conf['moisture_threshold']
 
 print(get_moisture_theshold())
 
