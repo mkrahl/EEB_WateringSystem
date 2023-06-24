@@ -22,8 +22,8 @@ chan = AnalogIn(mcp, MCP.P0)
 
 GPIO.setmode(GPIO.BCM)
 valve_channel = 21
-GPIO.setup(channel, GPIO.OUT)
-GPIO.output(channel , 1)
+GPIO.setup(valve_channel, GPIO.OUT)
+GPIO.output(valve_channel , 1)
 GPIO.setwarnings(False)
 
 def open_valve(seconds):
