@@ -38,7 +38,7 @@ with open('./raw_moisture.csv', 'a', newline='') as file:
     writer = csv.writer(file)
     writer.writerow(headers)
 
-open_valve(40)
+watered = False
 
 while True:
     # open the file in the write mode
@@ -54,4 +54,9 @@ while True:
 
     print('Raw ADC Value: ', chan.value)
     print('ADC Voltage: ' + str(chan.voltage) + 'V')
+
+    if not watered:
+        open_valve(40)
+        watered = True
+
     time.sleep(5)
