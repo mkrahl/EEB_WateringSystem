@@ -1,6 +1,7 @@
 import csv
 import time
 from datetime import datetime, timedelta
+import os
 from os.path import exists
 
 out_path = './out/'
@@ -9,7 +10,7 @@ headers = ['time', 'adc', 'voltage']
 
 def setup():
     if not exists(out_path):
-        open(out_path)
+        os.mkdir(out_path)
     if not exists(path_to_csv):
         with open(path_to_csv, 'a', newline='') as file:
             # create the csv writer
