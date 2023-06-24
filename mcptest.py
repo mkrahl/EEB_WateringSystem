@@ -10,9 +10,12 @@ import logger
 
 import json
 
-with open('./conf.json', 'r') as f:
-  data = json.load(f)
-  print(data)
+def get_moisture_theshold():
+    with open('./conf.json', 'r') as f:
+        conf = json.load(f)
+        return conf.moisture_threshold
+
+print(get_moisture_theshold())
 
 # create the spi bus
 spi = busio.SPI(clock=board.SCK, MISO=board.MISO, MOSI=board.MOSI)
