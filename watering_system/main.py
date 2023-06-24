@@ -5,8 +5,14 @@ import RPi.GPIO as GPIO
 import adafruit_mcp3xxx.mcp3008 as MCP
 from adafruit_mcp3xxx.analog_in import AnalogIn
 import time
+import requests
 import valve_controller
 import logger
+from dotenv import load_dotenv
+
+load_dotenv()
+
+MONITORING_SERVER_URL = os.environ.get("MONITORING_SERVER_URL")
 
 import json
 
@@ -33,6 +39,8 @@ valve_controller.setup()
 logger.setup()
 
 while True:
+    response = requests.get(MONITORING_SERVER_URL)
+    print()
     logger.log(chan.value, str(chan.voltage) + 'V')
 
     if chan.value >= get_moisture_threshold():
