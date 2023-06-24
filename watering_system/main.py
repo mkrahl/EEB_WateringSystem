@@ -40,8 +40,9 @@ valve_controller.setup()
 logger.setup()
 
 while True:
+    print(MONITORING_SERVER_URL)
     response = requests.get(MONITORING_SERVER_URL)
-    print()
+    print(response)
     logger.log(chan.value, str(chan.voltage) + 'V')
 
     if chan.value >= get_moisture_threshold():
