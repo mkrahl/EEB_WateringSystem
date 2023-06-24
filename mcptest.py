@@ -10,13 +10,12 @@ import logger
 
 import json
 
-def get_moisture_theshold():
+def get_desired_moisture():
     with open('./conf.json', 'r') as f:
-        conf = json.load(f)
-        print(conf)
-        return conf['moisture_threshold']
+        return json.load(f)['desired_moisture']
 
-print(get_moisture_theshold())
+def get_moisture_threshold():
+    return get_desired_moisture() * 1.1
 
 # create the spi bus
 spi = busio.SPI(clock=board.SCK, MISO=board.MISO, MOSI=board.MOSI)
@@ -33,14 +32,11 @@ chan = AnalogIn(mcp, MCP.P0)
 valve_controller.setup()
 logger.setup()
 
-watered = False
-
 while True:
     logger.log(chan.value, str(chan.voltage) + 'V')
 
-    if not watered:
-        valve_controller.open(40)
+    if chan.value >= get_moisture_threshold():
+        valve_controller.open(20)
         valve_controller.close()
-        watered = True
 
     time.sleep(5)
