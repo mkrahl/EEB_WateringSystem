@@ -8,6 +8,7 @@ import time
 import requests
 import valve_controller
 import logger
+import os
 from dotenv import load_dotenv
 
 load_dotenv()
