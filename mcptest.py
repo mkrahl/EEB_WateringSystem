@@ -8,6 +8,7 @@ from adafruit_mcp3xxx.analog_in import AnalogIn
 import csv
 from datetime import datetime, timedelta
 import valve_controller
+import logger
 
 # create the spi bus
 spi = busio.SPI(clock=board.SCK, MISO=board.MISO, MOSI=board.MOSI)
@@ -22,30 +23,12 @@ mcp = MCP.MCP3008(spi, cs)
 chan = AnalogIn(mcp, MCP.P0)
 
 valve_controller.setup()
-
-headers = ['time', 'adc', 'voltage']
-
-with open('./raw_moisture.csv', 'a', newline='') as file:
-    # create the csv writer
-    writer = csv.writer(file)
-    writer.writerow(headers)
+logger.setup()
 
 watered = False
 
 while True:
-    # open the file in the write mode
-    with open('./raw_moisture.csv', 'a', newline='') as file:
-        now = datetime.now() + timedelta(hours=1)
-        current_time = now.strftime("%m:%d:%Y %H:%M:%S")
-        data = [current_time, chan.value, chan.voltage]
-        
-        # create the csv writer
-        writer = csv.writer(file)
-        writer.writerow(data)
-        file.close()
-
-    print('Raw ADC Value: ', chan.value)
-    print('ADC Voltage: ' + str(chan.voltage) + 'V')
+    logger.log(chan.value, str(chan.voltage) + 'V')
 
     if not watered:
         valve_controller.open(40)
