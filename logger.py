@@ -5,7 +5,7 @@ import os
 from os.path import exists
 
 out_path = './out/'
-path_to_csv = out_path + 'moisture_csv.csv'
+path_to_csv = out_path + 'moisture_log.csv'
 headers = ['time', 'adc', 'voltage']
 
 def setup():
