@@ -1,12 +1,9 @@
 import busio
 import digitalio
 import board
-import time
 import RPi.GPIO as GPIO
 import adafruit_mcp3xxx.mcp3008 as MCP
 from adafruit_mcp3xxx.analog_in import AnalogIn
-import csv
-from datetime import datetime, timedelta
 import valve_controller
 import logger
 
