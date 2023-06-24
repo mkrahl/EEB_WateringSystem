@@ -8,6 +8,12 @@ import time
 import valve_controller
 import logger
 
+import json
+
+with open('./conf.json', 'r') as f:
+  data = json.load(f)
+  print(data)
+
 # create the spi bus
 spi = busio.SPI(clock=board.SCK, MISO=board.MISO, MOSI=board.MOSI)
  
