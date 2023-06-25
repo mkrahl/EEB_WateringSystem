@@ -10,7 +10,7 @@ def set_desired_moisture(moisture):
     with open(CONF_PATH, 'r+') as f:
         data = json.load(f)
         data['desired_moisture'] = moisture
-        file.write(json.dumps(data))
+        f.write(json.dumps(data))
 
 def get_moisture_threshold():
     return get_desired_moisture() * 1.1
