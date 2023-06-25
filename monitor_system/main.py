@@ -11,7 +11,7 @@ def state():
     return { "response_code": 200, "data": values }
 
 @app.route("/update", methods=["GET", "POST"])
-def state():
+def update():
     if request.method == "POST":
         data = request.get_json()
         print(data)
