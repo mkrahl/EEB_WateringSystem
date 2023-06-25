@@ -16,6 +16,7 @@ load_dotenv()
 
 MONITORING_SERVER_URL = os.environ.get("MONITORING_SERVER_URL")
 
+
 def get_desired_moisture():
     with open('./conf.json', 'r') as f:
         return json.load(f)['desired_moisture']
@@ -39,11 +40,10 @@ valve_controller.setup()
 logger.setup()
 
 while True:
-    response = requests.get(MONITORING_SERVER_URL)
-    print(response)
-    if response.ok:
-        print(response.json())
-    logger.log(chan.value, str(chan.voltage) + 'V')
+    data = { "adc": chan.value, "voltage": chan.voltage }
+    logger.log(data)
+
+    requests.post(MONITORING_SERVER_URL, data=data)
 
     if chan.value >= get_moisture_threshold():
         valve_controller.open(20)

@@ -17,12 +17,12 @@ def setup():
             writer = csv.writer(file)
             writer.writerow(headers)
 
-def log(adc, voltage):
+def log(data):
     with open(path_to_csv, 'a', newline='') as file:
         now = datetime.now() + timedelta(hours=1)
         current_time = now.strftime("%m-%d-%Y %H:%M:%S")
         
-        data = [current_time, adc, voltage]
+        data = [current_time, data['adc'], data['voltage']]
 
         print('Logging:', data)
         
