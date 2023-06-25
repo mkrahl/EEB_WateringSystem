@@ -8,7 +8,7 @@ BASE_ROUTE = "/api/v1"
 @app.route("/", methods=["GET", "POST"])
 def index():
     if request.method == "GET":
-        return 'index'
+        return { response_code: 200, message: "index" }
 
     if request.method == "POST":
         req = request.json
