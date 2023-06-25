@@ -1,4 +1,6 @@
-const LIMIT = 10;
+const LIMIT = 30;
+const MIN_MOISTURE = 0; // air moisture
+const MAX_MOISTURE = 64000;
 let values = [];
 let chart = null;
 
@@ -10,13 +12,17 @@ document.getElementById('calibrateBtn')
         })
     });
 
+function mapMoisture(value) {
+    return Math.max(MAX_MOISTURE - value, 0);
+}
+
 function fetchData() {
     fetch('http://localhost:5000/update')
         .then(response => response.json())
         .then(data => {
             console.log(values)
             values.push({
-                moisture: data.data.moisture,
+                moisture: mapMoisture(data.data.moisture),
                 timestamp: data.data.timestamp
             }
             )
@@ -44,7 +50,7 @@ function fetchData() {
                         },
                         {
                             label: 'Threshold',
-                            data: Array(values_slice.length).fill(data.data.threshold),
+                            data: Array(values_slice.length).fill(mapMoisture(data.data.threshold)),
                             borderColor: 'red',
                             fill: false
                         }
@@ -54,8 +60,21 @@ function fetchData() {
                 options: {
                     scales: {
                         y: {
-                            min: 0,
-                            max: 68000
+                            min: MIN_MOISTURE,
+                            max: MAX_MOISTURE,
+                            ticks: {
+                                callback: function(value, index, values) {
+                                    if (value >= MAX_MOISTURE) 
+                                        return "VERY WET";
+                                    else if (value <= MIN_MOISTURE)
+                                        return "VERY DRY";
+                                    else if (value === 50000)
+                                        return "WET"
+                                    else if (value === 20000)
+                                        return "DRY"
+                                    else return "";
+                                }
+                              }
                         }
                     }
                 }
