@@ -27,7 +27,7 @@ def update():
         },
     }))
     resp.headers['Access-Control-Allow-Origin'] = '*'
-    resp.header['Content-Type'] = 'application/json'
+    resp.headers['Content-Type'] = 'application/json'
     return resp
 
 @app.route("/calibrate", methods=["POST"])
