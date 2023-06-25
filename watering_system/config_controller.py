@@ -7,7 +7,7 @@ def get_desired_moisture():
         return json.load(f)['desired_moisture']
 
 def set_desired_moisture(moisture):
-    with open(CONF_PATH, 'r+') as f:
+    with open(CONF_PATH, 'r') as f:
         data = json.load(f)
         #data['desired_moisture'] = moisture
         #file.write(json.dumps(data))
