@@ -1,4 +1,4 @@
-from flask import Flask, request, flask
+from flask import Flask, request, Response
 import config_controller
 import moisture_controller
 
@@ -12,7 +12,7 @@ headers = {
 
 @app.route("/update", methods=["GET"])
 def update():
-    resp = flask.Response({ 
+    resp = Response({ 
         "response_code": 200, 
         "data": { 
             "moisture": moisture_controller.get_adc() 
