@@ -1,6 +1,6 @@
 from flask import Flask, request, Response
-import config_controller
-import moisture_controller
+from controllers import config
+from controllers import moisture
 import json
 from datetime import datetime, timedelta
 
@@ -21,8 +21,8 @@ def update():
     resp.set_data(json.dumps({ 
         "response_code": 200, 
         "data": {
-            "moisture": moisture_controller.get_adc(),
-            "threshold": config_controller.get_moisture_threshold(),
+            "moisture": moisture.get_adc(),
+            "threshold": config.get_moisture_threshold(),
             "timestamp": current_time
         },
     }))
@@ -32,8 +32,8 @@ def update():
 
 @app.route("/calibrate", methods=["POST"])
 def calibrate():
-    config_controller.set_desired_moisture(
-        moisture_controller.get_adc()
+    config.set_desired_moisture(
+        moisture.get_adc()
     )
     return { 
         "response_code": 200,

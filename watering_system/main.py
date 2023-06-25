@@ -1,8 +1,8 @@
 import time
 import requests
-import valve_controller
-import config_controller
-import moisture_controller
+from controllers import valve
+from controllers import config
+from controllers import moisture
 import logger
 import os
 from dotenv import load_dotenv
@@ -11,17 +11,15 @@ load_dotenv()
 
 MONITORING_SERVER_URL = os.environ.get("MONITORING_SERVER_URL")
 
-valve_controller.setup()
+valve.setup()
 logger.setup()
 
 while True:
-    data = { "adc": moisture_controller.get_adc(), "voltage": moisture_controller.get_voltage() }
+    data = { "adc": moisture.get_adc(), "voltage": moisture.get_voltage() }
     logger.log(data)
 
-    requests.post(MONITORING_SERVER_URL + "update", json=data, headers={'Content-Type': 'application/json'})
-
-    if moisture_controller.get_adc() >= config_controller.get_moisture_threshold():
-        valve_controller.open(4)
-        valve_controller.close()
+    if moisture.get_adc() >= config.get_moisture_threshold():
+        valve.open(4)
+        valve.close()
 
     time.sleep(5)

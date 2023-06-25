@@ -1,8 +1,8 @@
 import csv
 import time
 from datetime import datetime, timedelta
-import os
 from os.path import exists
+import os
 
 out_path = './out/'
 path_to_csv = out_path + 'moisture_log.csv'
