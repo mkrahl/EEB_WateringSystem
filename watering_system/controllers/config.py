@@ -1,6 +1,6 @@
 import json
 
-CONF_PATH = '../conf.json'
+CONF_PATH = './conf.json'
 
 def get_desired_moisture():
     with open(CONF_PATH, 'r') as f:
