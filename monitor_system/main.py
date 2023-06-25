@@ -4,12 +4,16 @@ app = Flask(__name__)
 
 BASE_ROUTE = "/api/v1"
 
+values = []
 
 @app.route("/", methods=["GET", "POST"])
-def index():
-    if request.method == "GET":
-        return { "response_code": 200, "message": "index" }
+def state():
+    return { "response_code": 200, "data": values }
 
+@app.route("/state", methods=["GET", "POST"])
+def state():
     if request.method == "POST":
-        print(request.get_json())
+        data = request.get_json()
+        print(data)
+        values.append(data)
         return { "response_code": 200 }
