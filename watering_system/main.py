@@ -42,7 +42,8 @@ logger.setup()
 while True:
     print(MONITORING_SERVER_URL)
     response = requests.get(MONITORING_SERVER_URL)
-    print(response)
+    if response.ok:
+        print(response.json())
     logger.log(chan.value, str(chan.voltage) + 'V')
 
     if chan.value >= get_moisture_threshold():
