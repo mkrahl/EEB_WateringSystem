@@ -46,7 +46,7 @@ while True:
     requests.post(MONITORING_SERVER_URL, data=data)
 
     if chan.value >= get_moisture_threshold():
-        valve_controller.open(20)
+        valve_controller.open(4)
         valve_controller.close()
 
     time.sleep(5)
