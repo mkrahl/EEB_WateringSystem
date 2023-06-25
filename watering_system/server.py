@@ -7,18 +7,19 @@ app = Flask(__name__)
 BASE_ROUTE = "/api/v1"
 
 headers = {
-    'access-control-allow-origin': '*'
+    'Access-Control-Allow-Origin': '*'
 }
 
 @app.route("/update", methods=["GET"])
 def update():
-    return { 
+    resp = flask.Response({ 
         "response_code": 200, 
         "data": { 
             "moisture": moisture_controller.get_adc() 
         },
-        "headers": headers
-    }
+    })
+    resp.headers['Access-Control-Allow-Origin'] = '*'
+    return resp
 
 @app.route("/calibrate", methods=["POST"])
 def calibrate():
