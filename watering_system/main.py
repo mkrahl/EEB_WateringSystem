@@ -20,7 +20,7 @@ while True:
 
     requests.post(MONITORING_SERVER_URL + "update", json=data, headers={'Content-Type': 'application/json'})
 
-    if chan.value >= config_controller.get_moisture_threshold():
+    if moisture_controller.get_adc() >= config_controller.get_moisture_threshold():
         valve_controller.open(4)
         valve_controller.close()
 
