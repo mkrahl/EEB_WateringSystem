@@ -9,13 +9,12 @@ import requests
 import valve_controller
 import logger
 import os
+import json
 from dotenv import load_dotenv
 
 load_dotenv()
 
 MONITORING_SERVER_URL = os.environ.get("MONITORING_SERVER_URL")
-
-import json
 
 def get_desired_moisture():
     with open('./conf.json', 'r') as f:
@@ -40,8 +39,8 @@ valve_controller.setup()
 logger.setup()
 
 while True:
-    print(MONITORING_SERVER_URL)
     response = requests.get(MONITORING_SERVER_URL)
+    print(response)
     if response.ok:
         print(response.json())
     logger.log(chan.value, str(chan.voltage) + 'V')
