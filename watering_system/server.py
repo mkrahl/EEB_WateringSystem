@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, flask
 import config_controller
 import moisture_controller
 
