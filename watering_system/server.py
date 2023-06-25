@@ -1,6 +1,7 @@
 from flask import Flask, request, Response
 import config_controller
 import moisture_controller
+import json
 
 app = Flask(__name__)
 
@@ -12,12 +13,13 @@ headers = {
 
 @app.route("/update", methods=["GET"])
 def update():
-    resp = Response({ 
+    resp = Response()
+    resp.set_data(json.dumps({ 
         "response_code": 200, 
         "data": { 
             "moisture": moisture_controller.get_adc() 
         },
-    })
+    }))
     resp.headers['Access-Control-Allow-Origin'] = '*'
     return resp
 
