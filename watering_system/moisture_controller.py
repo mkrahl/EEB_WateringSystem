@@ -22,5 +22,5 @@ def setup():
 def get_adc():
     return chan.value
 
-def get_voltage();
+def get_voltage():
     return chan.voltage
