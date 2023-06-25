@@ -11,7 +11,6 @@ load_dotenv()
 
 MONITORING_SERVER_URL = os.environ.get("MONITORING_SERVER_URL")
 
-moisture_controller.setup()
 valve_controller.setup()
 logger.setup()
 
