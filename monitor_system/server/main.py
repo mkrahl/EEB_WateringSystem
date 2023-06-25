@@ -1,6 +1,7 @@
-from flask import Flask, request
+from flask import Flask, request, Response
 from dotenv import load_dotenv
 import os
+import json
 import requests
 
 load_dotenv()
@@ -10,20 +11,22 @@ app = Flask(__name__)
 MICROCONTROLLER_SERVER_URL = os.environ.get("MICROCONTROLLER_SERVER_URL")
 BASE_ROUTE = "/api/v1"
 
-values = []
-
-@app.route("/", methods=["GET"])
-def index():
-    return { "response_code": 200, "data": values }
-
-@app.route("/update", methods=["POST"])
+@app.route("/update", methods=["GET"])
 def update():
-    data = request.get_json()
-    print(data)
-    values.append(data)
-    return { "response_code": 200 }
+    response = requests.get(MICROCONTROLLER_SERVER_URL + "update")
+    
+    resp = Response()
+    resp.set_data(json.dumps(response.json()))
+    resp.headers['Access-Control-Allow-Origin'] = '*'
+    resp.headers['Content-Type'] = 'application/json'
+    
+    return resp
 
 @app.route("/calibrate", methods=["POST"])
-def state():
+def calibrate():
     requests.post(MICROCONTROLLER_SERVER_URL + "calibrate")
-    return { "response_code": 200 }
+
+    resp = Response()
+    resp.headers['Access-Control-Allow-Origin'] = '*'
+
+    return resp
