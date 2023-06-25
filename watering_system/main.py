@@ -19,7 +19,10 @@ while True:
     logger.log(data)
 
     if moisture.get_adc() >= config.get_moisture_threshold():
+        print("Moisture is below theshold")
         valve.open(4)
         valve.close()
-
+    else:
+        print("Moisture is above threshold")
+    
     time.sleep(5)

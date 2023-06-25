@@ -12,6 +12,21 @@ document.getElementById('calibrateBtn')
         })
     });
 
+const valveStatusElement = document.getElementById('valveStatus');
+const valveIndicatorElement = document.getElementById('valveIndicator');
+
+function openValve() {
+    valveStatusElement.textContent = 'Valve Open';
+    valveIndicatorElement.classList.add('open');
+    valveIndicatorElement.classList.remove('closed');
+}
+
+function closeValve() {
+    valveStatusElement.textContent = 'Valve Closed';
+    valveIndicatorElement.classList.add('closed');
+    valveIndicatorElement.classList.remove('open');
+}
+
 function mapMoisture(value) {
     return Math.max(MAX_MOISTURE - value, 0);
 }
@@ -20,17 +35,21 @@ function fetchData() {
     fetch('http://localhost:5000/update')
         .then(response => response.json())
         .then(data => {
-            console.log(values)
             values.push({
                 moisture: mapMoisture(data.data.moisture),
                 timestamp: data.data.timestamp
-            }
-            )
+            })
             let values_slice = null;
             if (values.length >= LIMIT)
                 values_slice = values.slice(values.length - LIMIT, values.length - 1)
             else
                 values_slice = values
+
+            if (data.data.valve_is_open) {
+                openValve();
+            } else {
+                closeValve();
+            }
 
             if (chart !== null) {
                 chart.destroy();
