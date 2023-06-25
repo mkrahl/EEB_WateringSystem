@@ -10,7 +10,7 @@ values = []
 def state():
     return { "response_code": 200, "data": values }
 
-@app.route("/state", methods=["GET", "POST"])
+@app.route("/update", methods=["GET", "POST"])
 def state():
     if request.method == "POST":
         data = request.get_json()
