@@ -14,10 +14,15 @@ headers = {
 @app.route("/update", methods=["GET"])
 def update():
     resp = Response()
+
+    now = datetime.now() + timedelta(hours=1)
+    current_time = now.strftime("%m-%d-%Y %H:%M:%S")
     resp.set_data(json.dumps({ 
         "response_code": 200, 
-        "data": { 
-            "moisture": moisture_controller.get_adc() 
+        "data": {
+            "moisture": moisture_controller.get_adc(),
+            "threshold": config_controller.get_moisture_threshold(),
+            "timestamp": current_time
         },
     }))
     resp.headers['Access-Control-Allow-Origin'] = '*'
