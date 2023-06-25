@@ -43,7 +43,7 @@ while True:
     data = { "adc": chan.value, "voltage": chan.voltage }
     logger.log(data)
 
-    requests.post(MONITORING_SERVER_URL, data=data)
+    requests.post(MONITORING_SERVER_URL, data=data, headers={'Content-Type': 'application/json'})
 
     if chan.value >= get_moisture_threshold():
         valve_controller.open(4)

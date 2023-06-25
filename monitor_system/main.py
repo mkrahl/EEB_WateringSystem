@@ -11,5 +11,5 @@ def index():
         return { "response_code": 200, "message": "index" }
 
     if request.method == "POST":
-        req = request.json
-        print(req)
+        print(request.get_json())
+        return { "response_code": 200 }
