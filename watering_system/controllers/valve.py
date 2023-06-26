@@ -17,6 +17,7 @@ def open(seconds):
     time.sleep(seconds)
 
 def close():
+    time.sleep(5)
     GPIO.output(valve_channel , 1)
     is_open = False
     print('Closed valve')
