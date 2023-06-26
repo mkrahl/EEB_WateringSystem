@@ -22,5 +22,5 @@ def close():
     print('Closed valve')
 
 def valve_is_open():
-    print("valve request")
+    print("valve is opened: ", is_open)
     return is_open
