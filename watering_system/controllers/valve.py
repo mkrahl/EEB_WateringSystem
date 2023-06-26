@@ -20,6 +20,3 @@ def close():
     GPIO.output(valve_channel , 1)
     valve_is_open = False
     print('Closed valve')
-
-def vale_is_open():
-    return vale_is_open
