@@ -10,7 +10,7 @@ def setup():
     GPIO.setup(valve_channel, GPIO.OUT)
     GPIO.output(valve_channel , 1)
 
-async def open(seconds):
+def open(seconds):
     global is_open
     GPIO.output(valve_channel , 0)
     is_open = True
@@ -23,7 +23,7 @@ def close():
     is_open = False
     print('Closed valve')
 
-async def valve_is_open():
+def valve_is_open():
     global is_open
     print("valve is opened: ", is_open)
     return is_open
