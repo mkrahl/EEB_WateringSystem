@@ -24,7 +24,7 @@ def update():
         "data": {
             "moisture": moisture.get_adc(),
             "threshold": config.get_moisture_threshold(),
-            "valve_is_open": valve.vale_is_open(),
+            "valve_is_open": valve.vale_is_open,
             "timestamp": current_time
         },
     }))
