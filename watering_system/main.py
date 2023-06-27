@@ -15,7 +15,12 @@ while True:
         "voltage": moisture.get_voltage() 
     })
 
-    if moisture.get_adc() >= config.get_moisture_threshold():
+    threshold = config.get_moisture_threshold()
+
+    if threshold is None:
+        continue
+
+    if moisture.get_adc() >= threshold:
         print("Moisture is below theshold")
         valve.open(config.get_irrigation_interval())
         valve.close()

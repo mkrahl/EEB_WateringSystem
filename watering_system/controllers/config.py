@@ -15,6 +15,11 @@ def set_desired_moisture(moisture):
         f.truncate()
 
 def get_moisture_threshold():
+    desired_moisture = get_desired_moisture()
+    
+    if desired_moisture is None:
+        return None
+
     return get_desired_moisture() * 1.1
 
 def get_measurement_interval():
