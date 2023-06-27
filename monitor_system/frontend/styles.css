@@ -10,7 +10,7 @@ h1 {
     margin-bottom: 20px;
 }
 
-#calibrateBtn {
+.btn {
     display: block;
     padding: 10px 20px;
     height: 3em;
