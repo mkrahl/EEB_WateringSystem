@@ -16,3 +16,11 @@ def set_desired_moisture(moisture):
 
 def get_moisture_threshold():
     return get_desired_moisture() * 1.1
+
+def get_measurement_interval():
+    with open(CONF_PATH, 'r') as f:
+        return json.load(f)['measurement_interval']
+
+def get_irrigation_interval():
+    with open(CONF_PATH, 'r') as f:
+        return json.load(f)['irrigation_interval']

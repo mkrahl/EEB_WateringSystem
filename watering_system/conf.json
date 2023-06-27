@@ -1,3 +1,5 @@
 {
-    "desired_moisture": 10000
+    "desired_moisture": null,
+    "measurement_interval": 10,
+    "irrigation_interval": 30
 }

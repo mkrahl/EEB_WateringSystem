@@ -17,9 +17,9 @@ while True:
 
     if moisture.get_adc() >= config.get_moisture_threshold():
         print("Moisture is below theshold")
-        valve.open(4)
+        valve.open(config.get_irrigation_interval())
         valve.close()
     else:
         print("Moisture is above threshold")
     
-    time.sleep(5)
+    time.sleep(config.get_measurement_interval())
