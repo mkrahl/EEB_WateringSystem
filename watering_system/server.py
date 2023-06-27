@@ -64,6 +64,7 @@ def turn_on():
 @app.route("/turn-off", methods=["POST"])
 def turn_off():
     config.set_tmp('is_on', False)
+    valve.setup()
     valve.close()
 
     resp = Response()

@@ -41,3 +41,4 @@ try:
         sleep()
 except: 
     valve.close()
+    config.clear()

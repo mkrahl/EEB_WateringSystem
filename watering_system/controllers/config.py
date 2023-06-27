@@ -55,3 +55,7 @@ def set_tmp(key, value):
         f.seek(0)
         f.write(json.dumps(data))
         f.truncate()
+
+def clear():
+    if exists(TMP):
+        os.remove(TMP)
