@@ -9,6 +9,9 @@ import os
 valve.setup()
 logger.setup()
 
+def sleep():
+    time.sleep(config.get_measurement_interval())
+
 while True:
     logger.log({ 
         "adc": moisture.get_adc(), 
@@ -18,6 +21,7 @@ while True:
     threshold = config.get_moisture_threshold()
 
     if threshold is None:
+        sleep()
         continue
 
     if moisture.get_adc() >= threshold:
@@ -27,4 +31,4 @@ while True:
     else:
         print("Moisture is above threshold")
     
-    time.sleep(config.get_measurement_interval())
+    sleep()
