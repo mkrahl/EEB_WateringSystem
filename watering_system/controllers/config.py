@@ -32,6 +32,8 @@ def get_irrigation_interval():
         return json.load(f)['irrigation_interval']
 
 def get_tmp(key):
+    if not exists(TMP):
+        return None
     with open(TMP, 'r') as f:
         try:
             value = json.load(f)[key]
@@ -40,6 +42,8 @@ def get_tmp(key):
             return None
 
 def set_tmp(key, value):
+    if not exists(TMP):
+        os.mkdir(TMP)
     with open(TMP, 'r+') as f:
         data = json.load(f)
         data[key] = value
