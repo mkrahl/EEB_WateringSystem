@@ -32,7 +32,7 @@ def calibrate():
     return resp
 
 @app.route("/turn-on", methods=["POST"])
-def turn_off():
+def turn_on():
     requests.post(MICROCONTROLLER_SERVER_URL + "turn-off")
 
     resp = Response()

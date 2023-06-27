@@ -35,14 +35,14 @@ def calibrate():
     config.set_desired_moisture(
         moisture.get_adc()
     )
-    
+
     resp = Response()
     resp.headers['Access-Control-Allow-Origin'] = '*'
 
     return resp
 
 @app.route("/turn-on", methods=["POST"])
-def turn_off():
+def turn_on():
     config.set_tmp('is_on', True)
 
     resp = Response()
