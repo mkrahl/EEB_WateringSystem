@@ -3,6 +3,9 @@ const MIN_MOISTURE = 0; // air moisture
 const MAX_MOISTURE = 64000;
 let values = [];
 let chart = null;
+let isOn = false;
+
+const SERVER_URL = 'http://localhost:5000/';
 
 const chartOptions = { 
     scales: {
@@ -29,19 +32,24 @@ const chartOptions = {
 document.getElementById('calibrateBtn')
     .addEventListener('click', function (event) {
         event.preventDefault();
-        fetch('http://localhost:5000/calibrate', {
+        fetch(SERVER_URL + 'calibrate', {
             method: 'POST'
         })
     });
 
-let isOn = false;
+document.getElementById('resetBtn')
+    .addEventListener('click', function (event) {
+        event.preventDefault();
+        fetch(SERVER_URL + 'reset', {
+            method: 'POST'
+        })
+    });
 
 document.getElementById('switch')
     .addEventListener('change', function (event) {
         event.preventDefault();
         isOn = !isOn;
-
-        fetch(`http://localhost:5000/${isOn ? 'turn-on' : 'turn-off'}`, {
+        fetch(`${SERVER_URL}${isOn ? 'turn-on' : 'turn-off'}`, {
             method: 'POST'
         })
     });

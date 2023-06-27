@@ -41,6 +41,17 @@ def calibrate():
 
     return resp
 
+@app.route("/reset", methods=["POST"])
+def reset():
+    config.set_desired_moisture(
+        None
+    )
+
+    resp = Response()
+    resp.headers['Access-Control-Allow-Origin'] = '*'
+
+    return resp
+
 @app.route("/turn-on", methods=["POST"])
 def turn_on():
     config.set_tmp('is_on', True)
@@ -53,6 +64,7 @@ def turn_on():
 @app.route("/turn-off", methods=["POST"])
 def turn_off():
     config.set_tmp('is_on', False)
+    valve.close()
 
     resp = Response()
     resp.headers['Access-Control-Allow-Origin'] = '*'

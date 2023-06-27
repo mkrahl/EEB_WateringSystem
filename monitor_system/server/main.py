@@ -31,6 +31,15 @@ def calibrate():
 
     return resp
 
+@app.route("/reset", methods=["POST"])
+def reset():
+    requests.post(MICROCONTROLLER_SERVER_URL + "reset")
+
+    resp = Response()
+    resp.headers['Access-Control-Allow-Origin'] = '*'
+
+    return resp
+
 @app.route("/turn-on", methods=["POST"])
 def turn_on():
     requests.post(MICROCONTROLLER_SERVER_URL + "turn-on")
