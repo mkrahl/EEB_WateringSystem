@@ -35,5 +35,5 @@ def close():
     print('Closed valve')
 
 def valve_is_open():
-    with open(CONF_PATH, 'r') as f:
+    with open(TMP, 'r') as f:
         return json.load(f)['is_open']
