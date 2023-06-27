@@ -45,7 +45,7 @@ def get_tmp(key):
 
 def set_tmp(key, value):
     if not exists(TMP):
-        os.mkdir(TMP)
+        open(TMP, 'w')
     with open(TMP, 'r+') as f:
         data = json.load(f)
         data[key] = value
