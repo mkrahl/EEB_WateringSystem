@@ -24,6 +24,4 @@ def close():
     print('Closed valve')
 
 def valve_is_open():
-    global is_open
-    print("valve is opened: ", is_open)
     return is_open
