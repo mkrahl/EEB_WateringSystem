@@ -1,4 +1,6 @@
 import json
+from os.path import exists
+import os
 
 CONF_PATH = './conf.json'
 TMP = './tmp'
