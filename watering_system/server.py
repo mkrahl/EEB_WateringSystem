@@ -9,9 +9,6 @@ app = Flask(__name__)
 
 BASE_ROUTE = "/api/v1"
 
-headers = {
-    'Access-Control-Allow-Origin': '*'
-}
 
 @app.route("/update", methods=["GET"])
 def update():
@@ -30,6 +27,7 @@ def update():
     }))
     resp.headers['Access-Control-Allow-Origin'] = '*'
     resp.headers['Content-Type'] = 'application/json'
+
     return resp
 
 @app.route("/calibrate", methods=["POST"])
@@ -37,7 +35,26 @@ def calibrate():
     config.set_desired_moisture(
         moisture.get_adc()
     )
-    return { 
-        "response_code": 200,
-        "headers": headers 
-    }
+    
+    resp = Response()
+    resp.headers['Access-Control-Allow-Origin'] = '*'
+
+    return resp
+
+@app.route("/turn-on", methods=["POST"])
+def turn_off():
+    config.set_tmp('is_on', True)
+
+    resp = Response()
+    resp.headers['Access-Control-Allow-Origin'] = '*'
+
+    return resp
+
+@app.route("/turn-off", methods=["POST"])
+def turn_off():
+    config.set_tmp('is_on', False)
+
+    resp = Response()
+    resp.headers['Access-Control-Allow-Origin'] = '*'
+
+    return resp

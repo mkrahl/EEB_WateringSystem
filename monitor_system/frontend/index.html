@@ -4,76 +4,18 @@
 <head>
     <title>Smart Irrigation Dashboard</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: #f2f2f2;
-        }
-
-        h1 {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        #calibrateBtn {
-            display: block;
-            padding: 10px 20px;
-            height: 3em;
-            max-height: 3em;
-            font-size: 16px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        #valveIndicator {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 8em;
-            height: 3em;
-            max-height: 3em;
-            margin: 0;
-            padding: 5px;
-            background-color: #ccc;
-            border-radius: 4px;
-            font-size: 16px;
-        }
-
-        .open {
-            background-color: green !important;
-            color: white;
-        }
-
-        .closed {
-            background-color: red !important;
-            color: white;
-        }
-
-        .top-bar {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 2em;
-        }
-
-        canvas {
-            max-width: 100%;
-            margin: 20px auto;
-            height: 50rem;
-            background-color: #fff;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
     <h1>Irrigation Dashboard</h1>
     <div class="top-bar">
+        <h4>OFF</h4>
+        <label class="switch">
+            <input id="switch" type="checkbox">
+            <span class="slider round"></span>
+        </label>    
+        <h4>ON</h4>      
         <div id="valveIndicator">
             <span id="valveStatus"></span>
         </div>

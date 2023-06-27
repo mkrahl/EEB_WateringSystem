@@ -30,3 +30,21 @@ def calibrate():
     resp.headers['Access-Control-Allow-Origin'] = '*'
 
     return resp
+
+@app.route("/turn-on", methods=["POST"])
+def turn_off():
+    requests.post(MICROCONTROLLER_SERVER_URL + "turn-off")
+
+    resp = Response()
+    resp.headers['Access-Control-Allow-Origin'] = '*'
+    
+    return resp
+
+@app.route("/turn-off", methods=["POST"])
+def turn_off():
+    requests.post(MICROCONTROLLER_SERVER_URL + "turn-on")
+
+    resp = Response()
+    resp.headers['Access-Control-Allow-Origin'] = '*'
+    
+    return resp

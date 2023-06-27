@@ -12,8 +12,14 @@ logger.setup()
 def sleep():
     time.sleep(config.get_measurement_interval())
 
-try: 
+try:
     while True:
+        is_on = config.get_tmp('is_on')
+
+        if not is_on:
+            sleep()
+            continue
+
         logger.log({ 
             "adc": moisture.get_adc(), 
             "voltage": moisture.get_voltage() 

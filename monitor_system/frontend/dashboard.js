@@ -34,6 +34,18 @@ document.getElementById('calibrateBtn')
         })
     });
 
+let isOn = false;
+
+document.getElementById('switch')
+    .addEventListener('change', function (event) {
+        event.preventDefault();
+        isOn = !isOn;
+
+        fetch(`http://localhost:5000/${isOn ? 'turn-on' : 'turn-off'}`, {
+            method: 'POST'
+        })
+    });
+
 const valveStatusElement = document.getElementById('valveStatus');
 const valveIndicatorElement = document.getElementById('valveIndicator');
 
