@@ -1,6 +1,6 @@
 import RPi.GPIO as GPIO
 import time
-import config
+from controllers import config
 
 valve_channel = 21
 
