@@ -3,7 +3,7 @@ from os.path import exists
 import os
 
 CONF_PATH = './conf.json'
-TMP = './tmp'
+TMP = './tmp.json'
 
 def get_desired_moisture():
     with open(CONF_PATH, 'r') as f:
@@ -46,8 +46,9 @@ def get_tmp(key):
 def set_tmp(key, value):
     if not exists(TMP):
         with open(TMP, 'w') as f:
-            empty_dict = {}
+            empty_dict = { key: value }
             f.write(json.dumps(empty_dict))
+            return
     with open(TMP, 'r+') as f:
         data = json.load(f)
         data[key] = value
