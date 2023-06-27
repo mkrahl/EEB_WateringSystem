@@ -12,23 +12,26 @@ logger.setup()
 def sleep():
     time.sleep(config.get_measurement_interval())
 
-while True:
-    logger.log({ 
-        "adc": moisture.get_adc(), 
-        "voltage": moisture.get_voltage() 
-    })
+try: 
+    while True:
+        logger.log({ 
+            "adc": moisture.get_adc(), 
+            "voltage": moisture.get_voltage() 
+        })
 
-    threshold = config.get_moisture_threshold()
+        threshold = config.get_moisture_threshold()
 
-    if threshold is None:
+        if threshold is None:
+            sleep()
+            continue
+
+        if moisture.get_adc() >= threshold:
+            print("Moisture is below theshold")
+            valve.open(config.get_irrigation_interval())
+            valve.close()
+        else:
+            print("Moisture is above threshold")
+        
         sleep()
-        continue
-
-    if moisture.get_adc() >= threshold:
-        print("Moisture is below theshold")
-        valve.open(config.get_irrigation_interval())
-        valve.close()
-    else:
-        print("Moisture is above threshold")
-    
-    sleep()
+except: 
+    valve.close()
