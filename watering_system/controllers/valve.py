@@ -1,5 +1,6 @@
 import RPi.GPIO as GPIO
 import time
+import config
 
 valve_channel = 21
 
@@ -14,26 +15,15 @@ def setup():
 def open(seconds):
     global is_open
     GPIO.output(valve_channel , 0)
-    with open(TMP, 'r+') as f:
-        data = json.load(f)
-        data['is_open'] = True
-        f.seek(0)
-        f.write(json.dumps(data))
-        f.truncate()
+    config.set_tmp('is_open', True)
     print('Opened valve')
     time.sleep(seconds)
 
 def close():
     global is_open
     GPIO.output(valve_channel , 1)
-    with open(TMP, 'r+') as f:
-        data = json.load(f)
-        data['is_open'] = False
-        f.seek(0)
-        f.write(json.dumps(data))
-        f.truncate()
+    config.set_tmp('is_open', False)
     print('Closed valve')
 
 def valve_is_open():
-    with open(TMP, 'r') as f:
-        return json.load(f)['is_open']
+    return config.get_tmp('is_open')
