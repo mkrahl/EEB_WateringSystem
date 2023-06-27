@@ -4,6 +4,28 @@ const MAX_MOISTURE = 64000;
 let values = [];
 let chart = null;
 
+const chartOptions = { 
+    scales: {
+        y: {
+            min: MIN_MOISTURE,
+            max: MAX_MOISTURE,
+            ticks: {
+                callback: function(value, index, values) {
+                    if (value >= MAX_MOISTURE) 
+                        return "VERY WET";
+                    else if (value <= MIN_MOISTURE)
+                        return "VERY DRY";
+                    else if (value === 50000)
+                        return "WET"
+                    else if (value === 20000)
+                        return "DRY"
+                    else return "";
+                }
+            }
+        }
+    }   
+}
+
 document.getElementById('calibrateBtn')
     .addEventListener('click', function (event) {
         event.preventDefault();
@@ -55,48 +77,29 @@ function fetchData() {
                 chart.destroy();
             }
 
+            datasets = [{
+                label: 'Moisture',
+                data: values_slice.map(v => v.moisture),
+                borderColor: 'blue',
+                fill: false
+            }]
+
+            if (data.data.threshold !== null)
+                datasets.push({
+                    label: 'Threshold',
+                    data: Array(values_slice.length).fill(mapMoisture(data.data.threshold)),
+                    borderColor: 'red',
+                    fill: false
+                })
+
             const chartContext = document.getElementById('moistureChart').getContext('2d');
             chart = new Chart(chartContext, {
                 type: 'line',
                 data: {
                     labels: values_slice.map(v => v.timestamp),
-                    datasets: [
-                        {
-                            label: 'Moisture',
-                            data: values_slice.map(v => v.moisture),
-                            borderColor: 'blue',
-                            fill: false
-                        },
-                        {
-                            label: 'Threshold',
-                            data: Array(values_slice.length).fill(mapMoisture(data.data.threshold)),
-                            borderColor: 'red',
-                            fill: false
-                        }
-                    ]
-
+                    datasets: datasets
                 },
-                options: {
-                    scales: {
-                        y: {
-                            min: MIN_MOISTURE,
-                            max: MAX_MOISTURE,
-                            ticks: {
-                                callback: function(value, index, values) {
-                                    if (value >= MAX_MOISTURE) 
-                                        return "VERY WET";
-                                    else if (value <= MIN_MOISTURE)
-                                        return "VERY DRY";
-                                    else if (value === 50000)
-                                        return "WET"
-                                    else if (value === 20000)
-                                        return "DRY"
-                                    else return "";
-                                }
-                              }
-                        }
-                    }
-                }
+                options: chartOptions
             });
         })
         .catch(error => {
