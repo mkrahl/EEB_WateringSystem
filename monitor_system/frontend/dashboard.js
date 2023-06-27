@@ -45,8 +45,8 @@ function openValve() {
 
 function closeValve() {
     valveStatusElement.textContent = 'Valve Closed';
-    valveIndicatorElement.classList.add('closed');
     valveIndicatorElement.classList.remove('open');
+    valveIndicatorElement.classList.add('closed');
 }
 
 function mapMoisture(value) {
